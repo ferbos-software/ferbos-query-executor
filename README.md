@@ -96,3 +96,4 @@ Connect to Home Assistant's WebSocket API and send queries:
 ## License
 
 MIT License
+
