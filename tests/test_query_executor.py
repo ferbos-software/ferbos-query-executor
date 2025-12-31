@@ -6,6 +6,7 @@ from unittest.mock import AsyncMock, MagicMock, patch, mock_open
 from pathlib import Path
 import aiosqlite
 
+# Import after conftest.py has set up mocks
 from custom_components.ferbos_query_executor import async_setup, async_setup_entry
 from custom_components.ferbos_query_executor.__init__ import _run_sqlite_query
 
@@ -138,22 +139,26 @@ class TestSetup:
     @pytest.mark.asyncio
     async def test_async_setup(self):
         """Test async_setup function."""
+        from unittest.mock import patch
+        
         hass = MagicMock()
         config = {}
         
-        with patch("custom_components.ferbos_query_executor.__init__.websocket_api") as mock_ws:
+        with patch("homeassistant.components.websocket_api.async_register_command") as mock_register:
             result = await async_setup(hass, config)
             assert result is True
-            assert mock_ws.async_register_command.called
+            assert mock_register.called
 
     @pytest.mark.asyncio
     async def test_async_setup_entry(self):
         """Test async_setup_entry function."""
+        from unittest.mock import patch
+        
         hass = MagicMock()
         entry = MagicMock()
         
-        with patch("custom_components.ferbos_query_executor.__init__.websocket_api") as mock_ws:
+        with patch("homeassistant.components.websocket_api.async_register_command") as mock_register:
             result = await async_setup_entry(hass, entry)
             assert result is True
-            assert mock_ws.async_register_command.called
+            assert mock_register.called
 

@@ -1,9 +1,10 @@
 from __future__ import annotations
-from homeassistant import config_entries
-from homeassistant.core import HomeAssistant
-from homeassistant.data_entry_flow import FlowResult
-from .const import DOMAIN
+
 import voluptuous as vol
+from homeassistant import config_entries
+from homeassistant.data_entry_flow import FlowResult
+
+from .const import DOMAIN
 
 
 class FerbosQueryExecutorConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):

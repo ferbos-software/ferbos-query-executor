@@ -33,3 +33,4 @@ class TestConfigFlow:
             assert result["type"] == "create_entry"
             mock_create.assert_called_once_with(title="Ferbos Query Executor", data={})
 
+

@@ -67,16 +67,20 @@ class TestIntegrationSmoke:
 
     @pytest.mark.asyncio
     async def test_websocket_command_registration(self):
-        """Test that websocket commands are registered during setup."""
+        """Test that setup function can be called without errors."""
         from unittest.mock import MagicMock, patch
         
         hass = MagicMock()
         config = {}
         
-        with patch("custom_components.ferbos_query_executor.__init__.websocket_api") as mock_ws:
+        # Mock websocket_api to avoid circular import issues
+        with patch("homeassistant.components.websocket_api.async_register_command") as mock_register:
+            # Import after patching
             from custom_components.ferbos_query_executor import async_setup
-            await async_setup(hass, config)
+            result = await async_setup(hass, config)
             
-            # Verify websocket command was registered
-            assert mock_ws.async_register_command.called
+            # Verify setup succeeds
+            assert result is True
+            # Verify websocket command registration was attempted
+            assert mock_register.called
 

@@ -170,3 +170,4 @@ jobs:
           echo "Manifest Validation: ${{ needs.validate-manifest.result }}"
           echo "HACS Check: ${{ needs.check-hacs.result }}"
 
+
