@@ -4,6 +4,7 @@ from __future__ import annotations
 import pytest
 from unittest.mock import MagicMock
 
+# Import after conftest.py has mocked websocket_api
 from custom_components.ferbos_query_executor.__init__ import _run_sqlite_query
 
 
